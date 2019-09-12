@@ -10,6 +10,7 @@ public class Orders {
     @Column(name = "id")
     Integer orderId;
     @Column(name = "product")
+    @Enumerated(EnumType.STRING)
     Product product;
     @Column(name = "description")
     String description;
@@ -22,10 +23,13 @@ public class Orders {
     @Column(name = "clientNumber")
     Long clientNumber;
     @Column(name = "productStatus")
+    @Enumerated(EnumType.STRING)
     Status productStatus;
     @Column(name = "paymentStatus")
+    @Enumerated(EnumType.STRING)
     Payment paymentStatus;
     @Column(name = "deliveryStatus")
+    @Enumerated(EnumType.STRING)
     Delivery deliveryStatus;
 
 
