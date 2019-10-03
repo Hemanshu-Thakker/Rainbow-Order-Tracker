@@ -6,6 +6,8 @@ import com.rainbow.ordertracker.Repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,6 +84,7 @@ public class OrderService {
      * @param orders
      */
     public void addOrder(Orders orders){
+        orders.setDate(LocalDate.now());
         orderRepository.save(orders);
     }
 
@@ -93,6 +96,13 @@ public class OrderService {
     public void putOrder(Integer orderId, Orders order){
         order.setOrderId(orderId);
         orderRepository.save(order);
+    }
+
+    public boolean findId(Integer id){
+        if(orderRepository.findById(id).isPresent()){
+            return true;
+        }
+        return false;
     }
 
     /**

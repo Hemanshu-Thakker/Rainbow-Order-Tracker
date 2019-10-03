@@ -1,5 +1,5 @@
 package com.rainbow.ordertracker.Model;
 
 public enum Status {
-    Designing, Printing, Postpress;
+    Designing, Printing, Postpress, Terminated;
 }

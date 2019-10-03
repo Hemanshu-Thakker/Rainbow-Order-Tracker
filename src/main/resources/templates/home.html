@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+    <link type="text/css" rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<!--note while using variable in link include __${...}__-->
+<header>
+    <nav class="topnav">
+        <div class="container">
+            <a href="#">Home</a>
+            <a href="/orders/design">Designing</a>
+            <a href="/orders/print">Printing</a>
+            <a href="/orders/postpress">Post Press</a>
+        </div>
+    </nav>
+</header>
+
+<section class="sand-padding">
+    <div class="container">
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Product</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Description</th>
+                <th>Client</th>
+                <th>Phone</th>
+            </tr>
+            <tr th:each="orderUpdate: ${orders}" th:href="@{/orders/{id}(id=${orderUpdate.orderId})}">
+                <!--link not working-->
+                <td style="cursor:pointer">
+                    <a th:href="@{/orders/{id}(id=${orderUpdate.orderId})}" th:text="${orderUpdate.orderId}"></a>
+                </td>
+                <td th:text="${orderUpdate.product}" />
+                <td th:text="${orderUpdate.date}" />
+                <td th:text="${orderUpdate.productStatus}" />
+                <td th:text="${orderUpdate.description}"/>
+                <td th:text="${orderUpdate.clientName}"/>
+                <td th:text="${orderUpdate.clientNumber}"/>
+            </tr>
+        </table>
+        <div class="padding-add">
+            <a th:href="@{/orders/add}" class="button-style">Add Order</a>
+        </div>
+    </div>
+</section>
+</body>
+</html>

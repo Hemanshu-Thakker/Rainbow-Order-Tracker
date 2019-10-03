@@ -1,0 +1,85 @@
+table{
+    width: 100%;
+    background-color: #efefef;
+}
+
+table th {
+  background-color: #dcdcdc;
+  font-size: 20px;
+}
+
+tr:hover{
+    background-color: #dcdcdc;
+}
+
+table,th,td{
+            border: 1px solid black;
+            border-collapse: collapse;
+}
+
+th,td{
+    padding: 15px;
+    text-align: center;
+}
+
+a{
+    color:#000;
+    text-decoration: none;
+}
+a:hover{
+    color:#000;
+    text-decoration: none;
+}
+
+.button-style{
+    padding: 12px;
+    box-shadow: 2px 2px 5px #dcdcdc;
+    background-color: #4CAF50;
+    color: #f2f2f2;
+}
+
+
+.topnav{
+    overflow: hidden;
+    background-color: #4CAF50;
+}
+.topnav a{
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #4CAF50;
+  color: #f2f2f2;
+}
+
+.sand-padding{
+    margin: 50px 0px;
+}
+.padding-add{
+    margin: 40px 0px;
+}
+
+.form-styling{
+    padding: 50px;
+    border-radius: 5px;
+    background-color: #efefef;
+}
+
+.detail-style{
+    padding: 50px;
+    border-radius: 5px;
+    background-color: #efefef;
+}
+
+.background-dropdown{
+    background-color: white;
+    height: 30px;
+}
+input:focus{
+    background-color: white;
+}
