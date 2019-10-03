@@ -7,12 +7,16 @@ import com.rainbow.ordertracker.Model.Status;
 import com.rainbow.ordertracker.Service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Null;
 import java.util.List;
 
-@RestController
+@Controller
 public class OrderController {
 
     @Autowired
@@ -23,8 +27,9 @@ public class OrderController {
      * @return List
      */
     @RequestMapping("/orders")
-    public List<Orders> getAllOrders() {
-        return orderService.getAllOrder();
+    public String getAllOrders(Model model) {
+        model.addAttribute("orders",orderService.getAllOrder());
+        return "home";
     }
 
     /**
@@ -33,8 +38,9 @@ public class OrderController {
      * @return List
      */
     @RequestMapping("/orders/{id}")
-    public Orders getOrder(@PathVariable Integer id){
-        return orderService.getOrder(id);
+    public String getOrder(@PathVariable Integer id, Model model) {
+        model.addAttribute("order", orderService.getOrder(id));
+        return "orderDetail";
     }
 
     /**
@@ -42,8 +48,9 @@ public class OrderController {
      * @return
      */
     @RequestMapping("/orders/design")
-    public List<Orders> getAllOrders_status(){
-        return orderService.getAllOrder_design();
+    public String getAllOrders_status(Model model){
+        model.addAttribute("orders",orderService.getAllOrder_design());
+        return "design";
     }
 
     /**
@@ -51,8 +58,9 @@ public class OrderController {
      * @return
      */
     @RequestMapping("/orders/print")
-    public List<Orders> getAllOrders_print(){
-        return orderService.getAllOrder_print();
+    public String getAllOrders_print(Model model){
+        model.addAttribute("orders",orderService.getAllOrder_print());
+        return "print";
     }
 
     /**
@@ -60,44 +68,51 @@ public class OrderController {
      * @return
      */
     @RequestMapping("/orders/postpress")
-    public List<Orders> getAllOrders_postpress(){
-        return orderService.getAllOrder_postpress();
+    public String getAllOrders_postpress(Model model){
+        model.addAttribute("orders",orderService.getAllOrder_postpress());
+        return "postpress";
     }
 
     /**
      * POST an order
-     * @param order
      */
+    @RequestMapping("/orders/add")
+    public String addOrderPage(Model model){
+        //new id is created here
+        model.addAttribute("orders",new Orders());
+        return "addOrder";
+    }
+
     @RequestMapping(method = RequestMethod.POST, value = "/orders")
-    public void addOrders(@RequestBody Orders order){
+    public String addOrders(Orders order, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            return "errorpage";
+        }
+        if(order.getOrderId()!= null){
+            orderService.putOrder(order.getOrderId(),order);
+        }
         orderService.addOrder(order);
+        return "redirect:/orders/"+order.getOrderId();
     }
 
     /**
-     * PUT based on order
-     * @param id
-     * @param order
+     * PUT an order
      */
-    @RequestMapping(method = RequestMethod.PUT, value = "/orders/{id}")
-    public void putOrder(@PathVariable Integer id, @RequestBody Orders order){
-        orderService.putOrder(id,order);
-    }
-
-    /**
-     * DELETE
-     */
-    @RequestMapping(method = RequestMethod.DELETE, value = "/orders")
-    public void deleteAllOrders(){
-        orderService.deleteAllOrders();
+    @RequestMapping("/orders/add/{id}")
+    public String putOrder(@PathVariable Integer id, Model model){
+        model.addAttribute("orders",orderService.getOrder(id));
+        model.addAttribute(id);
+        return "addOrder";
     }
 
     /**
      * DELETE by id
      * @param id
      */
-    @RequestMapping(method = RequestMethod.DELETE, value = "/orders/{id}")
-    public void deleteOrder(@PathVariable Integer id){
+    @RequestMapping("/orders/delete/{id}")
+    public String deleteOrder(@PathVariable Integer id){
         orderService.deleteOrder(id);
+        return "redirect:/orders";
     }
 
 }

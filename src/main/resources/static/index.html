@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>I am a welcome message</h1>
+    <p>Lets hope Thymeleaf runs without web.xml</p>
+    <form th:action="@{/orders/add}" th:object="${orders}" method="post">
+        <p>Product: <input type="text" th:field="*{product}" /></p>
+        <p>Description <input type="text" th:field="*{description}" /></p>
+        <p>Quantity <input type="text" th:field="*{quantity}" /></p>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+</body>
+</html>

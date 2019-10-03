@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${order.product}">Order Details</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+    <link type="text/css" rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header>
+    <nav class="topnav">
+        <div class="container">
+            <a href="/orders">Home</a>
+            <a href="/orders/design">Designing</a>
+            <a href="/orders/print">Printing</a>
+            <a href="/orders/postpress">Post Press</a>
+        </div>
+    </nav>
+</header>
+
+<section class="sand-padding">
+    <div class="container">
+        <div class="detail-style">
+            <p><b>Order Id : </b><span th:text="${order.orderId}" /></p>
+            <p><b>Product : </b><span th:text="${order.product}" /></p>
+            <p><b>Quantity : </b><span th:text="${order.quantity}" /></p>
+            <p><b>Status : </b><span th:text="${order.productStatus}" /></p>
+            <p><b>Description : </b><span th:text="${order.description}" /></p>
+            <p><b>Client : </b><span th:text="${order.clientName}" /></p>
+            <p><b>Phone : </b><span th:text="${order.clientNumber}" /></p>
+        </div>
+        <p><a th:href="@{/orders/add/{id}(id=${order.orderId})}" class="button-style">Edit</a></p>
+        <p><a th:href="@{/orders/delete/{id}(id=${order.orderId})}" class="button-style">Delete</a></p>
+    </div>
+</section>
+
+</body>
+</html>

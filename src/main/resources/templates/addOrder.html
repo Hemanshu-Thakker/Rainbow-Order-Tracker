@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add Order</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+    <link type="text/css" rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<header>
+    <nav class="topnav">
+        <div class="container">
+            <a href="/orders">Home</a>
+            <a href="/orders/design">Designing</a>
+            <a href="/orders/print">Printing</a>
+            <a href="/orders/postpress">Post Press</a>
+        </div>
+    </nav>
+</header>
+
+<section class="sand-padding">
+    <div class="container">
+        <div class="form-styling">
+            <form name="orderForm" th:action="@{/orders}" th:object="${orders}" method="post" onsubmit="return validateForm()">
+                <h4 class="center">Form</h4>
+                <p><input type="hidden" th:field="*{orderId}" /></p>
+                <p>Product:
+                    <select name="product" th:field="*{product}" class="background-dropdown">
+                        <option value=""></option>
+                        <option value="VisitingCards">VisitingCards</option>
+                        <option value="Brochres">Brochres</option>
+                        <option value="Flyers">Flyers</option>
+                        <option value="Books">Books</option>
+                        <option value="Postpress">Postpress</option>
+                        <option value="Invitation">Invitation</option>
+                    </select>
+                </p>
+                <p>Description: <input type="text" name="description" th:field="*{description}" /></p>
+                <p>Quantity: <input type="text" name="quantity" th:field="*{quantity}" /></p>
+                <p>Client Name: <input type="text" name="cname" th:field="*{clientName}" /></p>
+                <p>Client Number: <input type="text" name="cno" th:field="*{clientNumber}" /></p>
+                <p>Product Status:
+                    <select name="status" th:field="*{productStatus}" class="background-dropdown">
+                        <option value=""></option>
+                        <option value="Designing">Designing</option>
+                        <option value="Printing">Printing</option>
+                        <option value="Postpress">Postpress</option>
+                    </select>
+                </p>
+                <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script src="/javascript/function.js"></script>
+</body>
+</html>

@@ -1,6 +1,8 @@
 package com.rainbow.ordertracker.Model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "orders")
 public class Orders {
@@ -12,6 +14,8 @@ public class Orders {
     @Column(name = "product")
     @Enumerated(EnumType.STRING)
     Product product;
+    @Column(name = "date")
+    LocalDate date;
     @Column(name = "description")
     String description;
     @Column(name = "quantity")
@@ -31,7 +35,6 @@ public class Orders {
     @Column(name = "deliveryStatus")
     @Enumerated(EnumType.STRING)
     Delivery deliveryStatus;
-
 
     public Orders(){
 
@@ -91,6 +94,10 @@ public class Orders {
         return clientNumber;
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
     /**
      *Setter
      */
@@ -132,6 +139,10 @@ public class Orders {
 
     public void setClientNumber(Long clientNumber) {
         this.clientNumber = clientNumber;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     @Override
